@@ -8,7 +8,7 @@ from random import randint
 import threading
 
 #Your token:
-token=''
+token='Token here:'
 
 def post(token,fr_list_id):
 	#Post in your wall
@@ -26,7 +26,7 @@ def clear(token):
 	fr_get_del=fr_get_del['response']
 	fr_list_id=[]
 	#Get friend deleted or banned
-	for i in fr_get_del:
+	for i in fr_get_del['items']:
 		if 'deactivated' in i:
 			fr_list_id=[i['id']]
 	#If in fr_list_id nothing:
@@ -36,6 +36,7 @@ def clear(token):
 		requests.get('https://api.vk.com/method/wall.post', params={'access_token': token, 'v': '5.101', 'message': message}).json()
 		with open('log.txt', 'a') as file:
 			file.write('[log]:'+'['+strftime('%H:%M:%S')+' '+strftime('%x')+']'+': '+'Nothing in fr_list_id, exit.'+'\n')
+
 		return False
 	else:
 		#Else:
